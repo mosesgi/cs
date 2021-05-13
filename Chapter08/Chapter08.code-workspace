@@ -5,6 +5,33 @@
 		},
 		{
 			"path": "WorkingWithNumbers"
+		},
+		{
+			"path": "WorkingWithText"
+		},
+		{
+			"path": "WorkingWithRegularExpressions"
+		},
+		{
+			"path": "WorkignWithLists"
+		},
+		{
+			"path": "WorkingWithDictionaries"
+		},
+		{
+			"path": "WorkingWithRanges"
+		},
+		{
+			"path": "WorkingWithNetworkResources"
+		},
+		{
+			"path": "WorkingWithReflection"
+		},
+		{
+			"path": "WorkingWithImages"
+		},
+		{
+			"path": "Internationalization"
 		}
 	],
 	"settings": {}
