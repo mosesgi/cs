@@ -8,6 +8,18 @@
 		},
 		{
 			"path": "EncryptionApp"
+		},
+		{
+			"path": "HashingApp"
+		},
+		{
+			"path": "SigningApp"
+		},
+		{
+			"path": "RandomizingApp"
+		},
+		{
+			"path": "SecureApp"
 		}
 	],
 	"settings": {}
