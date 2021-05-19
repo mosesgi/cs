@@ -24,7 +24,7 @@ namespace WorkingWithEncodings
             Encoding encoder = number switch
             {
                 ConsoleKey.D1 => Encoding.ASCII,
-                ConsoleKey.D2 => Encoding.UTF7,
+                // ConsoleKey.D2 => Encoding.UTF7,
                 ConsoleKey.D3 => Encoding.UTF8,
                 ConsoleKey.D4 => Encoding.Unicode,
                 ConsoleKey.D5 => Encoding.UTF32,
