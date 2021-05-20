@@ -8,6 +8,8 @@ using Microsoft.Extensions.Logging;
 using NorthwindMvc.Models;
 using Packt.Shared;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Http;
+using System.Net.Http.Json;
 
 
 namespace NorthwindMvc.Controllers
@@ -18,10 +20,14 @@ namespace NorthwindMvc.Controllers
 
         private Northwind db;
 
-        public HomeController(ILogger<HomeController> logger, Northwind dbContext)
+        private readonly IHttpClientFactory clientFactory;
+
+        public HomeController(ILogger<HomeController> logger, Northwind dbContext,
+            IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
             db = dbContext;
+            clientFactory = httpClientFactory;
         }
 
         public async Task<IActionResult> Index()
@@ -96,6 +102,26 @@ namespace NorthwindMvc.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public async Task<IActionResult> Customers(string country)
+        {
+            string uri;
+            if (string.IsNullOrEmpty(country))
+            {
+                ViewData["Title"] = "All customers worldwide";
+                uri = "api/customers/";
+            }
+            else
+            {
+                ViewData["Title"] = $"Customers in {country}";
+                uri = $"api/customers/?country={country}";
+            }
+            var client = clientFactory.CreateClient(name: "NorthwindService");
+            var request = new HttpRequestMessage(method: HttpMethod.Get, requestUri: uri);
+            HttpResponseMessage response = await client.SendAsync(request);
+            var model = await response.Content.ReadFromJsonAsync<IEnumerable<Customer>>();
+            return View(model);
         }
     }
 }

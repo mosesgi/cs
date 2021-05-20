@@ -22,6 +22,9 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 using static System.Console;
 using NorthwindService.Repositories;
 
+using Microsoft.AspNetCore.Http;        //getEndpoint() extension method
+using Microsoft.AspNetCore.Routing;     //RouteEndpoint
+
 namespace NorthwindService
 {
     public class Startup
@@ -36,6 +39,7 @@ namespace NorthwindService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             string databasePath = Path.Combine("..", "..", "db", "Northwind.db");
             services.AddDbContext<Northwind>(options => options.UseSqlite($"Data Source={databasePath}"));
 
@@ -65,6 +69,9 @@ namespace NorthwindService
             });
 
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+
+            //health check
+            services.AddHealthChecks().AddDbContextCheck<Northwind>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -86,11 +93,37 @@ namespace NorthwindService
             app.UseRouting();
 
             app.UseAuthorization();
+            
+            //must be after UseRouting and before UseEndpoints
+            app.UseCors(configurePolicy: options =>
+            {
+                options.WithMethods("GET", "POST", "PUT", "DELETE");
+                options.WithOrigins(
+                    "https://localhost:5002"    //for MVC client
+                );
+            });
+
+            app.Use(next => (context) =>{
+                var endpoint = context.GetEndpoint();
+                if (endpoint != null)
+                {
+                    WriteLine("*** Name: {0}; Route: {1}; Metadata: {2}",
+                        endpoint.DisplayName,
+                        (endpoint as RouteEndpoint)?.RoutePattern,
+                        string.Join(", ", endpoint.Metadata));
+                }
+                //pass context to next middleware in pipeline
+                return next(context);
+            });
+            app.UseMiddleware<SecurityHeaders>();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+            //health check
+            app.UseHealthChecks(path: "/howdoyoufeel");
         }
     }
 }
