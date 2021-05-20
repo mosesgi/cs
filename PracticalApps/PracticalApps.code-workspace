@@ -17,6 +17,9 @@
 		},
 		{
 			"path": "NorthwindMvc"
+		},
+		{
+			"path": "NorthwindService"
 		}
 	],
 	"settings": {}

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace NorthwindMvc
+namespace NorthwindService
 {
     public class Program
     {
@@ -21,10 +21,6 @@ namespace NorthwindMvc
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls(
-                        "http://localhost:5000",
-                        "https://localhost:5002"
-                    )
                 });
     }
 }
