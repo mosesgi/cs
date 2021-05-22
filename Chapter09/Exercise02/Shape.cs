@@ -1,7 +1,10 @@
 using System;
+using System.Xml.Serialization;
 
 namespace Packt.Shared
 {
+    [XmlInclude(typeof(Circle))]
+    [XmlInclude(typeof(Rectangle))]
     public class Shape
     {
         protected double height;
@@ -28,6 +31,8 @@ namespace Packt.Shared
                 width = value;
             } 
         }
+
+        public string Colour { get; set; }
         public virtual double Area 
         { 
             get
@@ -40,20 +45,12 @@ namespace Packt.Shared
 
     public class Rectangle : Shape
     {
-        public Rectangle(double height, double width)
-        {
-            base.height = height;
-            base.width = width;
-        }
+       
     }
 
     public class Square : Shape
     {
-        public Square(double width)
-        {
-            base.height = width;
-            base.width = width;
-        }
+        
         public override double Width
         {
             set
@@ -75,23 +72,9 @@ namespace Packt.Shared
 
     public class Circle : Shape
     {
-        public Circle(double radius)
-        {
-            base.width = radius * 2;
-            base.height = radius * 2;
-        }
-
         public double Radius
         {
-            get 
-            {
-                return width / 2;
-            }
-            set
-            {
-                width = value * 2;
-                height = value * 2;
-            }
+            get; set;
         }
         public override double Area
         {
