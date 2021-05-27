@@ -22,8 +22,7 @@ namespace WritingFunctions
       {
         Write("Enter a number between 0 and 255: ");
 
-        isNumber = byte.TryParse(
-          ReadLine(), out byte number);
+        isNumber = byte.TryParse(ReadLine(), out byte number);
 
         if (isNumber)
         {
@@ -37,8 +36,7 @@ namespace WritingFunctions
       while (isNumber);
     }
 
-    static decimal CalculateTax(
-      decimal amount, string twoLetterRegionCode)
+    static decimal CalculateTax(decimal amount, string twoLetterRegionCode)
     {
       decimal rate = 0.0M;
 

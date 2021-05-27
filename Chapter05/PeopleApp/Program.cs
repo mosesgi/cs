@@ -10,7 +10,7 @@ namespace PeopleApp
         {
             // PeopleProps();
             // BankAccountStatic();
-            PatternMatchingCs9();
+            // PatternMatchingCs9();
             Cs9Records();
         }
 
@@ -139,7 +139,8 @@ namespace PeopleApp
 
             var oscar = new ImmutableAnimal("Oscar", "Labrador");
             var (who, what) = oscar;        // calls Deconstruct method
-            WriteLine($"{who} is a {what}.");
+            (string who1, string what1) = oscar;
+            WriteLine($"{who1} is a {what1}.");
         }
     }
 }

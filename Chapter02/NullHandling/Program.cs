@@ -16,6 +16,7 @@ namespace NullHandling
     static void Main(string[] args)
     {
       int thisCannotBeNull = 4;
+      string? test = null;
       //thisCannotBeNull = null; // compile error!
 
       int? thisCouldBeNull = null;
@@ -25,6 +26,11 @@ namespace NullHandling
       thisCouldBeNull = 7;
       Console.WriteLine(thisCouldBeNull);
       Console.WriteLine(thisCouldBeNull.GetValueOrDefault());
+      if (thisCouldBeNull.HasValue)
+      {
+        Console.WriteLine(thisCouldBeNull==7);
+        Console.WriteLine(thisCouldBeNull.Value==7);
+      }
 
       var address = new Address();
       address.Building = null;

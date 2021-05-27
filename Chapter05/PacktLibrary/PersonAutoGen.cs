@@ -29,15 +29,15 @@ namespace Packt.Shared
             {
                 switch (value.ToLower())
                 {
-                case "red":
-                case "green":
-                case "blue":
-                    favoritePrimaryColor = value;
-                    break;
-                default:
-                    throw new System.ArgumentException(
-                        $"{value} is not a primary color. " + 
-                        "Choose from: red, green, blue.");
+                    case "red":
+                    case "green":
+                    case "blue":
+                        favoritePrimaryColor = value;
+                        break;
+                    default:
+                        throw new System.ArgumentException(
+                            $"{value} is not a primary color. " + 
+                            "Choose from: red, green, blue.");
                 }
             }
         }

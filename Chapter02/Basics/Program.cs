@@ -16,8 +16,7 @@ namespace Basics
       //System.Net.Http.HttpClient client;
 
       // loop through the assemblies that this app references 
-      foreach (var r in Assembly.GetEntryAssembly()
-        .GetReferencedAssemblies())
+      foreach (var r in Assembly.GetEntryAssembly().GetReferencedAssemblies())
       {
         // load the assembly so we can read its details
         var a = Assembly.Load(new AssemblyName(r.FullName));

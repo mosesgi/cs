@@ -5,6 +5,8 @@ using System.Linq;
 using System.Xml.Linq;
 
 using static System.Console;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.Logging;
 
 namespace LinqWithEFCore
 {
@@ -15,10 +17,10 @@ namespace LinqWithEFCore
             // FilterAndSort();
             // JoinCategoriesAndProducts();
             // GroupJoinCategoriesAndProducts();
-            // AggregateProducts();
+            AggregateProducts();
             // CustomExtensionMethods();
             // OutputProductsAsXml();
-            ProcessSettings();
+            // ProcessSettings();
         }
 
         static void FilterAndSort()
@@ -27,7 +29,7 @@ namespace LinqWithEFCore
             {
                 var query = db.Products
                     //query is a DbSet<Product>
-                    .ProcessSequence()      //extension method from MyLinqExtension.cs
+                    // .ProcessSequence()      //extension method from MyLinqExtension.cs
                     .Where(product => product.UnitPrice < 10M)
                     //query is now an IQueryable<Product>
                     .OrderByDescending(product => product.UnitPrice)
@@ -95,6 +97,7 @@ namespace LinqWithEFCore
         {
             using (var db = new Northwind())
             {
+                db.GetService<ILoggerFactory>().AddProvider(new ConsoleLoggerProvider());
                 WriteLine("{0,-25} {1,10}",
                   arg0: "Product count:",
                   arg1: db.Products.Count());
@@ -114,6 +117,9 @@ namespace LinqWithEFCore
                   arg0: "Value of units in stock:",
                   arg1: db.Products.AsEnumerable()
                     .Sum(p => p.UnitPrice * p.UnitsInStock));
+                WriteLine("{0,-25} {1,10:$#,##0.00}",
+                  arg0: "Value of units in stock:",
+                  arg1: db.Products.Sum(p => p.UnitPrice * p.UnitsInStock));        //this will use sql function
             }
         }
 

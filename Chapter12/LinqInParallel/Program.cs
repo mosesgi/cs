@@ -21,8 +21,7 @@ namespace LinqInParallel
                 .Select(number => number * number).ToArray();
             // In MacbookPro with 12 cores, non-parallel cost 12371 ms, but parallel cost 56801 ms!! WTF!
             watch.Stop();
-            WriteLine("{0:#,##0} elapsed milliseconds.",
-              arg0: watch.ElapsedMilliseconds);
+            WriteLine("{0:#,##0} elapsed milliseconds.", arg0: watch.ElapsedMilliseconds);
         }
     }
 }

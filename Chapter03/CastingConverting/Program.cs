@@ -75,6 +75,7 @@ namespace CastingConverting
       for (int index = 0; index < binaryObject.Length; index++)
       {
         Write($"{binaryObject[index]:X} ");
+        Write($"{binaryObject[index].ToString("X")} ");
       }
       WriteLine();
 

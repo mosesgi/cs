@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "WorkingWithEFCore"
+		},
+		{
+			"path": "Exercise02"
 		}
 	],
 	"settings": {}

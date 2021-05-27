@@ -9,9 +9,9 @@ namespace WorkingWithFileSystems
         static void Main(string[] args)
         {
             // OutputFileSystemInfo();
-            // WorkWithDrives();
+            WorkWithDrives();
             // WorkWithDirectories();
-            WorkWithFiles();
+            // WorkWithFiles();
         }
 
         static void OutputFileSystemInfo()
@@ -35,6 +35,7 @@ namespace WorkingWithFileSystems
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
             WriteLine("{0,-33} {1}", " .Personal)",
                 Environment.GetFolderPath(Environment.SpecialFolder.Personal));
+            WriteLine("{0,-33} {1}", " .CommonApplicationData)", Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData));
         }
 
         static void WorkWithDrives()

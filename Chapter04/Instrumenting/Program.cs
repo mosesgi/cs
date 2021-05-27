@@ -9,8 +9,7 @@ namespace Instrumenting
     static void Main(string[] args)
     {
       // write to a text file in the project folder
-      Trace.Listeners.Add(new TextWriterTraceListener(
-        File.CreateText("log.txt")));
+      Trace.Listeners.Add(new TextWriterTraceListener(File.CreateText("log.txt")));
 
       // text writer is buffered, so this option calls
       // Flush() on all listeners after writing
@@ -21,8 +20,7 @@ namespace Instrumenting
 
       var builder = new ConfigurationBuilder()
         .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("appsettings.json",
-          optional: true, reloadOnChange: true);
+        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
       IConfigurationRoot configuration = builder.Build();
 

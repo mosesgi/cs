@@ -36,7 +36,7 @@ namespace WorkignWithLists
             }
 
             //Immutable
-            var immutableCities = cities.ToImmutableList();
+            ImmutableList<string> immutableCities = cities.ToImmutableList();
             var newList = immutableCities.Add("Rio");
             Write("Immutable list of cities:");
             foreach (string city in immutableCities)

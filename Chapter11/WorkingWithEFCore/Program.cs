@@ -17,20 +17,20 @@ namespace WorkingWithEFCore
     {
         static void Main(string[] args)
         {
-            QueryCategories();
+            // QueryCategories();
             // FilteredIncludes();
             // QueryingProducts();
             // QueryingWithLike();
-            // if (AddProduct(6, "Bob's Burgers", 500M))
+            // if (AddProduct(6, "Mega Burgers", 400M))
             // {
             //     WriteLine("Add product successful. ");
             // }
             // if (IncreaseProductPrice("Bob", 20M)){
             //     WriteLine("Update product price successful.");
             // }
-            // int deleted = DeleteProducts("Bob");
-            // WriteLine($"{deleted} products were deleted.");
-            // ListProducts();
+            int deleted = DeleteProducts("Mega Burgers");
+            WriteLine($"{deleted} products were deleted.");
+            ListProducts();
         }
 
         static void QueryCategories()
@@ -148,7 +148,8 @@ namespace WorkingWithEFCore
                     Cost = price
                 };
                 //mark product as added in change tracking
-                db.Products.Add(newProduct);
+                // db.Products.Add(newProduct);
+                db.Add(newProduct);     //also works
                 //save tracked change to database
                 int affected = db.SaveChanges();
                 return (affected == 1);
