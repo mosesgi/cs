@@ -16,19 +16,19 @@ namespace WorkingWithTasks
             // MethodB();
             // MethodC();
 
-            /* WriteLine("Running methods asynchronously on multiple threads.");
+            WriteLine("Running methods asynchronously on multiple threads.");
             Task taskA = new Task(MethodA);
             taskA.Start();
             Task taskB = Task.Factory.StartNew(MethodB);
             Task taskC = Task.Run(new Action(MethodC));
             Task[] tasks = { taskA, taskB, taskC };
             Task.WaitAll(tasks);
-            WriteLine($"{timer.ElapsedMilliseconds:#,##0}ms elapsed."); */
+            WriteLine($"{timer.ElapsedMilliseconds:#,##0}ms elapsed.");
 
-            WriteLine("Passing the result of one task as an input into another.");
-            var taskCallWebServiceAndThenStoredProcedure = Task.Factory.StartNew(CallWebService)
-                        .ContinueWith(previousTask => CallStoredProcedure(previousTask.Result));
-            WriteLine($"Result: {taskCallWebServiceAndThenStoredProcedure.Result}");
+            // WriteLine("Passing the result of one task as an input into another.");
+            // var taskCallWebServiceAndThenStoredProcedure = Task.Factory.StartNew(CallWebService)
+            //             .ContinueWith(previousTask => CallStoredProcedure(previousTask.Result));
+            // WriteLine($"Result: {taskCallWebServiceAndThenStoredProcedure.Result}");
         }
 
         static void MethodA()

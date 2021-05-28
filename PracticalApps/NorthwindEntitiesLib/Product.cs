@@ -35,14 +35,14 @@ namespace Packt.Shared
         [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal? UnitPrice { get; set; }
         [Column(TypeName = "smallint")]
-        public long? UnitsInStock { get; set; }
+        public int? UnitsInStock { get; set; }
         [Column(TypeName = "smallint")]
-        public long? UnitsOnOrder { get; set; }
+        public int? UnitsOnOrder { get; set; }
         [Column(TypeName = "smallint")]
-        public long? ReorderLevel { get; set; }
+        public int? ReorderLevel { get; set; }
         [Required]
         [Column(TypeName = "bit")]
-        public byte[] Discontinued { get; set; }
+        public bool? Discontinued { get; set; }
 
         [ForeignKey(nameof(CategoryID))]
         [InverseProperty("Products")]

@@ -1,0 +1,32 @@
+@page
+@model NorthwindWeb.Pages.CustomerDetailModel
+<div class="row">
+    <h1 class="display-2">Customer Detail</h1>
+</div>
+<div class="row display-4">@Model.Customer.ContactName</div>
+<div class="row">Title: @Model.Customer.ContactTitle</div>
+<div class="row">Address: @Model.Customer.Address</div>
+<div class="row">Location: @Model.Customer.Country - @Model.Customer.City</div>
+<p/>
+<div class="row display-4">Orders</div>
+<div class="row">
+    <table class="table">
+        <tbody>
+            @foreach (var o in @Model.Customer.Orders)
+            {
+                <tr>
+                    <td>@o.OrderID</td>
+                    <td>
+                        <table>
+                            @foreach (var item in o.OrderDetails)
+                            {
+                                <tr><td>@item.Product.ProductName (@item.Quantity)</td></tr>
+                            }
+                        </table>
+                    </td>
+                    <td>@o.OrderDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

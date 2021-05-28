@@ -25,7 +25,7 @@ namespace Packt.Shared
         [Column(TypeName = "money")]
         public decimal? UnitPrice { get; set; }
         [Column(TypeName = "smallint")]
-        public long Quantity { get; set; }
+        public int Quantity { get; set; }
         [Column(TypeName = "real")]
         public double Discount { get; set; }
 
