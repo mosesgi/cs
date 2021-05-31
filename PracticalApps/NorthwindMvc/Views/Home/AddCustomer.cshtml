@@ -1,0 +1,25 @@
+@model NorthwindMvc.Models.CreateCustomerViewModel
+@{
+    ViewData["Title"] = "Create New Customer";
+}
+<h1>@ViewData["Title"]</h1>
+<div>
+    Enter data to Create a new Customer
+</div>
+<form method="POST" action="/home/addcustomer">
+    <div class="row"><label>CustomerID</label><input name="CustomerID" /></div>
+    <div class="row"><label>CompanyName</label><input name="CompanyName" /></div>
+    <div class="row"><label>ContactName</label><input name="ContactName" /></div>
+    <div class="row"><label>ContactTitle</label><input name="ContactTitle" /></div>
+    <input type="submit" />
+</form>
+
+@if (Model != null && Model.HasErrors)
+{
+    <div>
+        @foreach (var errorMsg in Model.ValidationErrors)
+        {
+            <div class="alert alert-danger" role="alert">@errorMsg</div>
+        }
+    </div>
+}

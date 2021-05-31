@@ -1,0 +1,25 @@
+@model Packt.Shared.Customer
+@{
+  ViewData["Title"] = "Customer Detail";
+}
+<h1>@ViewData["Title"]</h1>
+<div>
+  <dl class="dl-horizontal">
+    <dt>CustomerID</dt>
+    <dd>@Model.CustomerID</dd>
+    <dt>Company Name</dt>
+    <dd>@Model.CompanyName</dd>
+    <dt>Contact Name</dt>
+    <dd>@Model.ContactName</dd>
+    <dt>Contact Title</dt>
+    <dd>@Model.ContactTitle</dd>
+    <dt>Country</dt>
+    <dd>@Model.Country</dd>
+    <dt>Address</dt>
+    <dd>@Model.Address</dd>
+  </dl>
+</div>
+<form method="POST" action="/home/deletecustomer">
+    <input type="hidden" name="customerID" value="@Model.CustomerID" />
+    <input type="submit" value="Delete Customer" />
+</form>

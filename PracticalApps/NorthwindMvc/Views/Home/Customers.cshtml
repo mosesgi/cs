@@ -1,5 +1,10 @@
 @model IEnumerable<Packt.Shared.Customer>
 <h2>@ViewData["Title"]</h2>
+<div class="row">
+    <a class="btn btn-primary" href="addcustomer">
+      Create New Customer
+    </a>
+</div>
 <table>
     <thead>
         <tr>
@@ -17,7 +22,7 @@
                     @Html.DisplayFor(modelItem => item.CompanyName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ContactName)
+                    <a href="customerdetail/@item.CustomerID">@Html.DisplayFor(modelItem => item.ContactName)</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Address)

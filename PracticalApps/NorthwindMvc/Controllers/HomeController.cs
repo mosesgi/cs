@@ -123,5 +123,96 @@ namespace NorthwindMvc.Controllers
             var model = await response.Content.ReadFromJsonAsync<IEnumerable<Customer>>();
             return View(model);
         }
+
+        public IActionResult AddCustomer()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddCustomer(Customer customer)
+        {
+            if (!ModelState.IsValid)
+            {
+                _logger.LogError("Customer invalid. ");
+                var errors = ModelState.Values
+                    .SelectMany(state => state.Errors)
+                    .Select(error => error.ErrorMessage);
+                var model = new CreateCustomerViewModel
+                {
+                    Customer = customer,
+                    HasErrors = !ModelState.IsValid,
+                    ValidationErrors = ModelState.Values
+                        .SelectMany(state => state.Errors)
+                        .Select(error => error.ErrorMessage)
+                };
+                return View(model);
+            }
+            string uri = "api/customers/";
+            var client = clientFactory.CreateClient("NorthwindService");
+            var response = await client.PostAsJsonAsync(uri, customer);
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("customers","home");
+            }
+            else
+            {
+                _logger.LogError("Post error.", response.Content);
+                List<string> errors = new List<string>();
+                errors.Add(response.StatusCode+"");
+                errors.Add(response.Content.ToString());
+                var model = new CreateCustomerViewModel
+                {
+                    Customer = customer,
+                    HasErrors = true,
+                    ValidationErrors = errors
+                };
+                return View(model);
+            }
+        }
+
+        [HttpGet("/Home/customerdetail/{customerID}")]
+        public async Task<IActionResult> CustomerDetail(string customerID)
+        {
+            string uri = $"api/customers/{customerID}";
+            var client = clientFactory.CreateClient("NorthwindService");
+            var response = await client.GetAsync(uri);
+            if (response.IsSuccessStatusCode)
+            {
+                var customer = await response.Content.ReadFromJsonAsync<Customer>();
+                return View(customer);
+            }
+            else
+            {
+                _logger.LogError("Post error.", response.Content);
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteCustomer(string customerID)
+        {
+            string uri = $"api/customers/{customerID}";
+            var client = clientFactory.CreateClient("NorthwindService");
+            var response = await client.DeleteAsync(uri);
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("customers","home");
+            }
+            else
+            {
+                _logger.LogError("Post error.", response.Content);
+                List<string> errors = new List<string>();
+                errors.Add(response.StatusCode+"");
+                errors.Add(response.Content.ToString());
+                var model = new CreateCustomerViewModel
+                {
+                    Customer = new Customer{CustomerID = customerID, CompanyName = "Fake Data"},
+                    HasErrors = true,
+                    ValidationErrors = errors
+                };
+                return View(model);
+            }
+        }
     }
 }
