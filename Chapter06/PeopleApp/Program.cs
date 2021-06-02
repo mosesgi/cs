@@ -126,7 +126,18 @@ namespace PeopleApp
                 WriteLine($"  {person.Name}");
             }
             
-            Array.Sort(people, new PersonComparer());
+            // Array.Sort(people, new PersonComparer());
+            Array.Sort(people, (x, y) => {
+                int result = x.Name.Length.CompareTo(y.Name.Length);
+                if (result == 0) 
+                {
+                    return x.Name.CompareTo(y.Name);
+                }
+                else
+                {
+                    return result;
+                }
+            });
             foreach (var person in people) 
             {
                 WriteLine($"  {person.Name}");

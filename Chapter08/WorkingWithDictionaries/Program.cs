@@ -14,6 +14,9 @@ namespace WorkingWithDictionaries
             keywords.Add("long", "64-bit integer data type");
             keywords.Add("float", "Single precision floating point number");
             keywords.TryAdd("int", "another");
+            string notExist = keywords.GetValueOrDefault("non", "notExist");
+            WriteLine("Value of key \"non\": {0}", notExist);
+
             WriteLine("Keywords and their definitions");
             foreach (var key in keywords.Keys)
             {
